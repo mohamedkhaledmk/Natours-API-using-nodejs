@@ -2,7 +2,7 @@
 const Tour = require('./../models/Tour');
 const APIFeatures = require('../utils/apiFeatures');
 const catchAsync = require('../utils/catchAsync');
-
+const AppError = require('../utils/appError');
 // const tours = JSON.parse(
 //   fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
 // );
@@ -91,7 +91,9 @@ const getTour = catchAsync(async (req, res, next) => {
   const id = req.params.id;
   const tour = await Tour.findById(id);
   //Tour.findOne({_id:id});
-
+  if (!tour) {
+    return next(new AppError(`Cannot find a Tour with that ID`, 404));
+  }
   res.status(200).json({
     status: 'success',
     requestedAt: req.requestTime,

@@ -2,9 +2,9 @@ const exp = require('constants');
 const express = require('express');
 const morgan = require('morgan');
 
+const AppError = require('./utils/AppError');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
-const AppError = require('./utils/AppError');
 const globalErrorHandler = require('./controllers/errorController');
 const app = express();
 
