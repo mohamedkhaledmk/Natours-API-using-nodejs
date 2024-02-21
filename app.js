@@ -2,7 +2,7 @@ const exp = require('constants');
 const express = require('express');
 const morgan = require('morgan');
 
-const AppError = require('./utils/AppError');
+const AppError = require('./utils/appError');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const globalErrorHandler = require('./controllers/errorController');
@@ -16,6 +16,7 @@ app.use(express.static(`${__dirname}/public`));
 app.use((req, res, next) => {
   console.log('Hello from my middleware 👋');
   req.requestTime = new Date().toISOString(); //to add the req time to the req body
+  console.log(req.headers);
   next();
 });
 

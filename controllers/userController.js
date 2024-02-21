@@ -40,18 +40,42 @@ exports.getUser = async (req, res) => {
     .status(500)
     .json({ status: 'error', message: 'This route is not defined yet!' });
 };
-exports.createUser = (req, res) => {
-  res
-    .status(500)
-    .json({ status: 'error', message: 'This route is not defined yet!' });
+exports.createUser = async (req, res) => {
+  const newUser = await User.create({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+    passwordConfirm: req.body.passwordConfirm,
+  });
+
+  res.status(201).json({
+    status: 'success',
+    data: {
+      user: newUser,
+    },
+  });
 };
-exports.updateUser = (req, res) => {
-  res
-    .status(500)
-    .json({ status: 'error', message: 'This route is not defined yet!' });
+exports.updateUser = async (req, res) => {
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user,
+    },
+  });
 };
-exports.deleteUser = (req, res) => {
-  res
-    .status(500)
-    .json({ status: 'error', message: 'This route is not defined yet!' });
+exports.deleteUser = async (req, res) => {
+  const user = await User.findByIdAndDelete(req.params.id);
+
+  if (user) {
+    return res.status(200).json({
+      status: 'success',
+      data: {
+        user,
+      },
+    });
+  }
 };
