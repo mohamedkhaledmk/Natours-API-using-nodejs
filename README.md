@@ -21,13 +21,13 @@ To get started with Natours API, follow these steps:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-username/natours-api.git
+   git clone https://github.com/mohamedkhaledmk/Natours-API-using-nodejs.git
    ```
 
 2. **Install the dependencies**:
 
    ```bash
-   cd natours-api
+   cd Natours-API-using-nodejs
    npm install
    ```
 
